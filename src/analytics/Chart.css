@@ -1,0 +1,9 @@
+.chart {
+    animation: slide-in 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.group {
+    animation: slide-in 0.5s ease-out;
+    animation-fill-mode: both;
+}

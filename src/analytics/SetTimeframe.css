@@ -1,0 +1,32 @@
+.set-timeframe  {
+    display: flex;
+    justify-content: center;
+    background-color: var(--primary);
+    padding: 10px;
+    max-width: 500px;
+    /* margin: 10px auto; */
+    align-items: center;
+    height: 50px;
+    border-radius: var(--radius);
+}
+
+.set-timeframe-unit {
+    width: 110px;
+}
+
+ .set-timeframe > * {
+     margin: 2px;
+ }
+
+ .set-timeframe > input {
+     width: 30px;
+     border-radius: 5px;
+    border-width: 1px;
+    font-size: 14px;
+    padding: 9px;
+ }
+
+ .set-timeframe > button {
+     margin-left: 20px;
+     background-color: var(--green);
+ }
