@@ -39,12 +39,21 @@ const Growth = (props) => {
             create_fields={{ // create extra fields using the data pulled from cloud
                 'DoD growth': (data)=>{ // calculate month on month (MoM) growth 
                     var dods = []
-                    var start_date = new Date("Nov 2, 2019 11:26:01") // initial date where we uploaded contacts
+                    var start_date = new Date("Jan 1, 2020 00:00:00") // initial date where we uploaded contacts
+                    var first_entry_date = new Date(data['member_idx'][0]['x'])
+                    if (start_date<first_entry_date){
+                        start_date = first_entry_date
+                    }
                     while (start_date < new Date()) {
                         var end_date = increment_date(start_date, 1, 'days')
-                        var in_range = data['member_idx'].filter((entry)=>{var d = new Date(entry['x']); return d > start_date && d < end_date})
-                        var percentage_growth = 100 * in_range.length / in_range[0].y
-                        dods.push({x: in_range[in_range.length - 1]['x'], y: percentage_growth})
+                        var in_range = data['member_idx'].filter((entry)=>{var d = new Date(entry['x']); return d >= start_date && d < end_date})
+                        if (in_range.length==0){
+                            var percentage_growth = 0
+                            dods.push({x: dods[dods.length-1]['x'], y: percentage_growth})
+                        }else{
+                            percentage_growth = 100 * in_range.length / in_range[0].y
+                            dods.push({x: in_range[in_range.length - 1]['x'], y: percentage_growth})
+                        }
                         start_date = end_date
                     }
                     return dods
@@ -52,24 +61,43 @@ const Growth = (props) => {
 
                 'WoW_growth': (data)=>{ // calculate month on month (MoM) growth 
                     var wows = []
-                    var start_date = new Date("Nov 2, 2019 11:26:01") // initial date where we uploaded contacts
+                    var start_date = new Date("Jan 1, 2020 00:00:00") // initial date where we uploaded contacts
+                    var first_entry_date = new Date(data['member_idx'][0]['x'])
+                    if (start_date<first_entry_date){
+                        start_date = first_entry_date
+                    }
                     while (start_date < new Date()) {
                         var end_date = increment_date(start_date, 1, 'weeks')
-                        var in_range = data['member_idx'].filter((entry)=>{var d = new Date(entry['x']); return d > start_date && d < end_date})
-                        var percentage_growth = 100 * in_range.length / in_range[0].y
-                        wows.push({x: in_range[in_range.length - 1]['x'], y: percentage_growth})
+                        var in_range = data['member_idx'].filter((entry)=>{var d = new Date(entry['x']); return d >= start_date && d < end_date})
+                        if (in_range.length==0){
+                            var percentage_growth = 0
+                            wows.push({x: wows[wows.length-1]['x'], y: percentage_growth})
+                        }else{
+                            percentage_growth = 100 * in_range.length / in_range[0].y
+                            wows.push({x: in_range[in_range.length - 1]['x'], y: percentage_growth})
+                        }
+                        //wows.push({x: in_range[in_range.length - 1]['x'], y: percentage_growth})
                         start_date = end_date
                     }
                     return wows
                 },
                 'MoM_growth': (data)=>{ // calculate month on month (MoM) growth 
                     var moms = []
-                    var start_date = new Date("Nov 2, 2019 11:26:01") // initial date where we uploaded contacts
+                    var start_date = new Date("Jan 1, 2020 00:00:00") // initial date where we uploaded contacts
+                    var first_entry_date = new Date(data['member_idx'][0]['x'])
+                    if (start_date<first_entry_date){
+                        start_date = first_entry_date
+                    }
                     while (start_date < new Date()) {
                         var end_date = increment_date(start_date, 1, 'months')
-                        var in_range = data['member_idx'].filter((entry)=>{var d = new Date(entry['x']); return d > start_date && d < end_date})
-                        var percentage_growth = 100 * in_range.length / in_range[0].y
-                        moms.push({x: in_range[in_range.length - 1]['x'], y: percentage_growth})
+                        var in_range = data['member_idx'].filter((entry)=>{var d = new Date(entry['x']); return d >= start_date && d < end_date})
+                        if (in_range.length==0){
+                            var percentage_growth = 0
+                            moms.push({x: moms[moms.length-1]['x'], y: percentage_growth})
+                        }else{
+                            percentage_growth = 100 * in_range.length / in_range[0].y
+                            moms.push({x: in_range[in_range.length - 1]['x'], y: percentage_growth})
+                        }
                         start_date = end_date
                     }
                     return moms
